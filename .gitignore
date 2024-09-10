@@ -1,0 +1,62 @@
+# Java specific
+*.class
+*.jar
+*.war
+*.ear
+*.db
+*.log
+*.log.*
+*.pid
+*.h2.db
+*.sqlite
+*.swo
+*.swp
+
+# Maven specific
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!.mvn/wrapper/maven-wrapper.properties
+
+# Gradle specific
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+
+# Spring Boot specific
+spring-boot-devtools.jar
+spring-boot-devtools.properties
+
+# IDE specific
+.idea/
+*.iml
+*.ipr
+*.iws
+*.classpath
+*.project
+*.settings/
+*.vscode/
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Other
+*.sublime-workspace
+*.sublime-project
+*.goutputstream-*
+*.vscode/
+*.swo
+*.swp
+*.sublime-project
+*.sublime-workspace
+
+# Logs and databases
+logs/
+*.sql
+*.sqlite
+*.h2.db
+*.db
+
+# Test results
+/test-results/
