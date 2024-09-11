@@ -51,7 +51,7 @@ public class RecipeControllerUnitTest {
                 new PagedModel.PageMetadata(10, 0, 1)
         );
 
-        when(recipeService.getTrendingRecipes(anyInt(), anyInt())).thenReturn(page);
+        when(recipeService.getTrendingRecipes(anyInt(), anyInt(), anyString())).thenReturn(page);
         when(pagedResourcesAssembler.toModel(page)).thenReturn(pagedModel);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/getTrendingRecipes")
@@ -79,7 +79,7 @@ public class RecipeControllerUnitTest {
                 new PagedModel.PageMetadata(10, 0, 1)
         );
 
-        when(recipeService.getTrendingRecipesByDifficulty(anyInt(), anyInt(), anyString())).thenReturn(page);
+        when(recipeService.getTrendingRecipesByDifficulty(anyInt(), anyInt(), anyString(),anyString())).thenReturn(page);
         when(pagedResourcesAssembler.toModel(page)).thenReturn(pagedModel);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/getTrendingRecipesByDifficulty")
@@ -108,7 +108,7 @@ public class RecipeControllerUnitTest {
                 new PagedModel.PageMetadata(10, 0, 1)
         );
 
-        when(recipeService.getTrendingRecipes(anyInt(), anyInt())).thenReturn(page);
+        when(recipeService.getTrendingRecipes(anyInt(), anyInt(), anyString())).thenReturn(page);
         when(pagedResourcesAssembler.toModel(page)).thenReturn(pagedModel);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/getTrendingRecipesByDifficulty")

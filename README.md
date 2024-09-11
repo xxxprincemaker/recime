@@ -69,6 +69,7 @@ The application will be available at `http://localhost:8080`.
 
 - `page` (optional, default: 0): Page number.
 - `size` (optional, default: 5): Number of recipes per page.
+- `sort` (optional, default: position): Sort field (e.g., position, name, difficulty).
 
 **Example Request:**
 
@@ -90,6 +91,7 @@ Returns a paginated list of trending recipes ordered by position.
 
 - `page` (optional, default: 0): Page number.
 - `size` (optional, default: 5): Number of recipes per page.
+- `sort` (optional, default: position): Sort field (e.g., position, name, difficulty).
 - `difficulty` (required): Difficulty level of the recipes (e.g., easy, medium, hard).
 
 **Example Request:**

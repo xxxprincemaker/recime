@@ -50,7 +50,7 @@ public class RecipeServiceUnitTest {
         when(recipeRepository.findAll(pageable)).thenReturn(recipePage);
 
         // Act
-        Page<RecipeDTO> result = recipeService.getTrendingRecipes(0, 10);
+        Page<RecipeDTO> result = recipeService.getTrendingRecipes(0, 10, "position");
 
         // Assert that is getting the recipe on the correct position
         assertEquals(3, result.getTotalElements());
@@ -81,7 +81,7 @@ public class RecipeServiceUnitTest {
         when(recipeRepository.findAllByDifficulty("easy", pageable)).thenReturn(recipePage);
 
         // Act
-        Page<RecipeDTO> result = recipeService.getTrendingRecipesByDifficulty(0, 10, "easy");
+        Page<RecipeDTO> result = recipeService.getTrendingRecipesByDifficulty(0, 10, "position","easy");
 
         // Assert
         assertEquals(2, result.getTotalElements());

@@ -1,5 +1,7 @@
 package com.example.recime.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.*;
 
 @Getter

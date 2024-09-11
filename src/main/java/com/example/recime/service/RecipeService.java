@@ -14,15 +14,15 @@ import java.util.List;
 public class RecipeService {
     private final RecipeRepository recipeRepository;
 
-    public Page<RecipeDTO> getTrendingRecipes(Integer page, Integer size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("position").ascending());
+    public Page<RecipeDTO> getTrendingRecipes(Integer page, Integer size, String sortsBy) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortsBy).ascending());
         Page<Recipe> recipePage = recipeRepository.findAll(pageable);
         List<RecipeDTO> recipeDTOPage = recipePage.getContent().stream().map(this::convertToDTO).toList();
-        return  new PageImpl<>(recipeDTOPage, pageable, recipePage.getTotalElements());
+        return new PageImpl<>(recipeDTOPage, pageable, recipePage.getTotalElements());
     }
 
-    public Page<RecipeDTO> getTrendingRecipesByDifficulty(Integer page, Integer size, String difficulty) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("position").ascending());
+    public Page<RecipeDTO> getTrendingRecipesByDifficulty(Integer page, Integer size, String sortsBy,String difficulty) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortsBy).ascending());
         Page<Recipe> recipePage = recipeRepository.findAllByDifficulty(difficulty, pageable);
         List<RecipeDTO> recipeDTOPage = recipePage.getContent().stream().map(this::convertToDTO).toList();
         return  new PageImpl<>(recipeDTOPage, pageable, recipePage.getTotalElements());
