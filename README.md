@@ -91,9 +91,13 @@ The application will be available at `http://localhost`.
 
 ## API Endpoints
 
+### 0. Base URL
+
+The base URL for the API is: `/api`.
+
 ### 1. Get Trending Recipes
 
-**Endpoint:** `/getTrendingRecipes`
+**Endpoint:** `/recipe/search/findAllTrendingRecipes`
 
 **Method:** `GET`
 
@@ -107,7 +111,11 @@ The application will be available at `http://localhost`.
 **Example Request:**
 
 ```http
-GET http://localhost/getTrendingRecipes?page=0&size=5
+GET http://localhost:8080/api/recipe/search/findAllTrendingRecipes?page=0&size=5
+```
+
+```http
+GET http://localhost/api/recipe/search/findAllTrendingRecipes?page=0&size=5
 ```
 
 **Description:**
@@ -116,7 +124,7 @@ Returns a paginated list of trending recipes ordered by position.
 
 ### 2. Get Trending Recipes by Difficulty
 
-**Endpoint:** `/getTrendingRecipesByDifficulty`
+**Endpoint:** `/recipe/search/findAllTrendingRecipesByDifficulty`
 
 **Method:** `GET`
 
@@ -131,7 +139,11 @@ Returns a paginated list of trending recipes ordered by position.
 **Example Request:**
 
 ```http
-GET http://localhost/getTrendingRecipesByDifficulty?page=0&size=10&difficulty=easy
+GET http://localhost:8080/api/recipe/search/findAllTrendingRecipesByDifficulty?page=0&size=10&difficulty=easy
+```
+
+```http
+GET http://localhost/api/recipe/search/findAllTrendingRecipesByDifficulty?page=0&size=10&difficulty=easy
 ```
 
 **Description:**

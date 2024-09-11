@@ -2,7 +2,8 @@
 	"info": {
 		"_postman_id": "35632397-d0f6-4bda-b0dc-e026022eb031",
 		"name": "ReciMe - Code Challenge",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"description": "**ReciMe - Code Challenge**\n\n**Collection ID**: `35632397-d0f6-4bda-b0dc-e026022eb031`\n\n---\n\n### **1\\. Get Trending Recipes**\n\n**Request:**\n\n- **Method**: `GET`\n    \n- **URL**: `localhost/getTrendingRecipes?page=0&size=5`\n    \n    - **Host**: `localhost`\n        \n    - **Path**: `getTrendingRecipes`\n        \n    - **Query Parameters**:\n        \n        - `page` (optional, default: `0`): Page number.\n            \n        - `size` (optional, default: `5`): Number of recipes per page.\\`\n            \n\n**Tests:**\n\n1. `pm.test(\"Response status code is 200\", function () { pm.expect(pm.response.code).to.equal(200);});`\n    \n    - Verify that the response status code is `200`.\n        \n2. `pm.test(\"Content-Type header is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");});`\n    \n    - Ensure that the `Content-Type` header is `application/json`.\n        \n3. pm.test(\"Verify the presence of _embedded object and recipeDTOes array\", function () { const responseData = pm.response.json(); pm.expect(responseData).to.be.an('object'); pm.expect(responseData._embedded).to.exist.and.to.be.an('object'); pm.expect(responseData._embedded.recipeDTOes).to.exist.and.to.be.an('array');});pm.test(\"Validate the fields in the recipeDTOes array\", function () { const responseData = pm.response.json(); pm.expect(responseData).to.be.an('object'); pm.expect(responseData._embedded).to.exist.and.to.be.an('object'); pm.expect(responseData._embedded.recipeDTOes).to.exist.and.to.be.an('array'); responseData._embedded.recipeDTOes.forEach(function(recipe) { pm.expect(recipe.name).to.be.a('string'); pm.expect(recipe.description).to.be.a('string'); pm.expect(recipe.imageUrl).to.be.a('string'); pm.expect(recipe.recipe).to.be.a('string'); pm.expect(recipe.position).to.be.a('number'); pm.expect(recipe.difficulty).to.be.a('string'); });});pm.test(\"Verify the presence of _links and page objects\", function () { const responseData = pm.response.json(); pm.expect(responseData).to.be.an('object'); pm.expect(responseData._links).to.exist.and.to.be.an('object'); pm.expect(responseData._links.first).to.exist.and.to.be.an('object'); pm.expect(responseData._links.self).to.exist.and.to.be.an('object'); pm.expect(responseData._links.next).to.exist.and.to.be.an('object'); pm.expect(responseData._links.last).to.exist.and.to.be.an('object'); pm.expect(responseData.page).to.exist.and.to.be.an('object'); pm.expect(responseData.page.size).to.exist.and.to.be.a('number'); pm.expect(responseData.page.totalElements).to.exist.and.to.be.a('number'); pm.expect(responseData.page.totalPages).to.exist.and.to.be.a('number'); pm.expect(responseData.page.number).to.exist.and.to.be.a('number');});\n    \n    - Verify the presence of `_embedded` object and `recipeDTOes` array.\n        \n    - Validate the fields in the `recipeDTOes` array.\n        \n\n---\n\n### **2\\. Get Trending Recipes By Difficulty**\n\n**Request:**\n\n- **Method**: `GET`\n    \n- **URL**: `localhost/getTrendingRecipesByDifficulty?page=0&size=10&difficulty=medium`\n    \n    - **Host**: `localhost`\n        \n    - **Path**: `getTrendingRecipesByDifficulty`\n        \n    - **Query Parameters**:\n        \n        - `page` (optional, default: `0`): Page number.\n            \n        - `size` (optional, default: `10`): Number of recipes per page.\n            \n        - `difficulty` (required): Difficulty level of the recipes (e.g., `easy`, `medium`, `hard`).\n            \n\n**Tests:**\n\n1. pm.test(\"Response status code is 200\", function () { pm.response.to.have.status(200);});\n    \n    - Verify that the response status code is `200`.\n        \n2. pm.test(\"Content-Type header is application/json\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");});\n    \n    - Ensure that the `Content-Type` header is `application/json`.\n        \n3. pm.test(\"Response time is within an acceptable range\", function () { pm.expect(pm.response.responseTime).to.be.below(300);});\n    \n    - Ensure that the response time is within an acceptable range (e.g., below 300ms).\n        \n4. pm.test(\"Validate the presence of _links, page, size, totalElements, totalPages, and number in the response\", function () { const responseData = pm.response.json(); pm.expect(responseData).to.be.an('object'); pm.expect(responseData._links).to.exist; pm.expect(responseData.page).to.exist; pm.expect(responseData.page.size).to.exist; pm.expect(responseData.page.totalElements).to.exist; pm.expect(responseData.page.totalPages).to.exist; pm.expect(responseData.page.number).to.exist;});pm.test(\"Verify that the 'self' link is present in the _links section\", function () { const responseData = pm.response.json(); pm.expect(responseData._links).to.be.an('object'); pm.expect(responseData._links.self).to.exist;});\n    \n    - Verify the presence of `_links`, `page`, `size`, `totalElements`, `totalPages`, and `number` in the response.\n        \n    - Ensure that the 'self' link is present in the `_links` section.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "25797934"
 	},
 	"item": [
@@ -77,12 +78,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost/getTrendingRecipes?page=0&size=5",
+					"raw": "localhost/api/recipe/search/findAllTrendingRecipes?page=0&size=5",
 					"host": [
 						"localhost"
 					],
 					"path": [
-						"getTrendingRecipes"
+						"api",
+						"recipe",
+						"search",
+						"findAllTrendingRecipes"
 					],
 					"query": [
 						{
@@ -92,6 +96,16 @@
 						{
 							"key": "size",
 							"value": "5"
+						},
+						{
+							"key": "direction",
+							"value": "desc",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
 						}
 					]
 				}
@@ -150,12 +164,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost/getTrendingRecipesByDifficulty?page=0&size=10&difficulty=medium",
+					"raw": "localhost/api/recipe/search/findAllTrendingRecipesByDifficulty?page=0&size=10&difficulty=easy",
 					"host": [
 						"localhost"
 					],
 					"path": [
-						"getTrendingRecipesByDifficulty"
+						"api",
+						"recipe",
+						"search",
+						"findAllTrendingRecipesByDifficulty"
 					],
 					"query": [
 						{
@@ -168,7 +185,7 @@
 						},
 						{
 							"key": "difficulty",
-							"value": "medium"
+							"value": "easy"
 						}
 					]
 				}
