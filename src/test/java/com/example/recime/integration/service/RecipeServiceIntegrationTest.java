@@ -21,7 +21,7 @@ public class RecipeServiceIntegrationTest {
     @Test
     public void testGetTrendingRecipes() {
 
-        final Page<RecipeDTO> recipeDTOPage = recipeService.getTrendingRecipes(0, 10, "position");
+        final Page<RecipeDTO> recipeDTOPage = recipeService.getTrendingRecipes(0, 10, "position", "asc");
 
         Assertions.assertEquals(2, recipeDTOPage.getTotalPages());
         Assertions.assertEquals(20, recipeDTOPage.getTotalElements());
@@ -32,7 +32,7 @@ public class RecipeServiceIntegrationTest {
     @Test
     public void testGetTrendingRecipesByDifficulty() {
 
-        final Page<RecipeDTO> recipeDTOPage = recipeService.getTrendingRecipesByDifficulty(0, 10, "position","easy");
+        final Page<RecipeDTO> recipeDTOPage = recipeService.getTrendingRecipesByDifficulty(0, 10, "position","asc","easy");
 
         Assertions.assertEquals(1, recipeDTOPage.getTotalPages());
         Assertions.assertEquals(3, recipeDTOPage.getTotalElements());

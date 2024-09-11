@@ -3,6 +3,7 @@ package com.example.recime.service;
 import com.example.recime.model.dto.RecipeDTO;
 import com.example.recime.model.entity.Recipe;
 import com.example.recime.repository.RecipeRepository;
+import com.example.recime.util.mapper.RecipeMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
@@ -14,29 +15,20 @@ import java.util.List;
 public class RecipeService {
     private final RecipeRepository recipeRepository;
 
-    public Page<RecipeDTO> getTrendingRecipes(Integer page, Integer size, String sortsBy) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by(sortsBy).ascending());
+    public Page<RecipeDTO> getTrendingRecipes(Integer page, Integer size, String sortsBy, String direction) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(direction),sortsBy).ascending());
         Page<Recipe> recipePage = recipeRepository.findAll(pageable);
-        List<RecipeDTO> recipeDTOPage = recipePage.getContent().stream().map(this::convertToDTO).toList();
+        List<RecipeDTO> recipeDTOPage = recipePage.getContent().stream().map(RecipeMapper::convertToDTO).toList();
         return new PageImpl<>(recipeDTOPage, pageable, recipePage.getTotalElements());
     }
 
-    public Page<RecipeDTO> getTrendingRecipesByDifficulty(Integer page, Integer size, String sortsBy,String difficulty) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by(sortsBy).ascending());
+    public Page<RecipeDTO> getTrendingRecipesByDifficulty(Integer page, Integer size, String sortsBy, String direction,String difficulty) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(direction),sortsBy));
         Page<Recipe> recipePage = recipeRepository.findAllByDifficulty(difficulty, pageable);
-        List<RecipeDTO> recipeDTOPage = recipePage.getContent().stream().map(this::convertToDTO).toList();
+        List<RecipeDTO> recipeDTOPage = recipePage.getContent().stream().map(RecipeMapper::convertToDTO).toList();
         return  new PageImpl<>(recipeDTOPage, pageable, recipePage.getTotalElements());
     }
 
-    private RecipeDTO convertToDTO(Recipe recipe) {
-        return RecipeDTO.builder()
-                .name(recipe.getName())
-                .description(recipe.getDescription())
-                .imageUrl(recipe.getImageUrl())
-                .recipe(recipe.getRecipe())
-                .position(recipe.getPosition())
-                .difficulty(recipe.getDifficulty())
-                .build();
-    }
+
 
 }

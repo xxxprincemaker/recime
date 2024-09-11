@@ -22,9 +22,9 @@ public class RecipeController {
     @GetMapping(value = "/getTrendingRecipes", produces = "application/json")
     public ResponseEntity<PagedModel<EntityModel<RecipeDTO>>> getTrendingRecipes(@RequestParam(defaultValue = "0") Integer page,
                                                                                  @RequestParam(defaultValue = "5") Integer size,
-                                                                                 @RequestParam(defaultValue = "position") String sortBy
-                                                                                 ) {
-        Page<RecipeDTO> recipeDTOPage = recipeService.getTrendingRecipes(page, size, sortBy);
+                                                                                 @RequestParam(defaultValue = "position") String sortBy,
+                                                                                 @RequestParam(defaultValue = "asc") String direction) {
+        Page<RecipeDTO> recipeDTOPage = recipeService.getTrendingRecipes(page, size, sortBy, direction);
         PagedModel<EntityModel<RecipeDTO>> pagedModel = pagedResourcesAssembler.toModel(recipeDTOPage);
         return ResponseEntity.ok(pagedModel);
     }
@@ -33,8 +33,9 @@ public class RecipeController {
     public ResponseEntity<PagedModel<EntityModel<RecipeDTO>>> getTrendingRecipesByDifficulty(@RequestParam(defaultValue = "0") Integer page,
                                                                                              @RequestParam(defaultValue = "5") Integer size,
                                                                                              @RequestParam(defaultValue = "position") String sortBy,
-                                                                                             @RequestParam String difficulty) {
-        Page<RecipeDTO> recipeDTOPage = recipeService.getTrendingRecipesByDifficulty(page, size, sortBy,difficulty);
+                                                                                             @RequestParam String difficulty,
+                                                                                             @RequestParam(defaultValue = "asc") String direction) {
+        Page<RecipeDTO> recipeDTOPage = recipeService.getTrendingRecipesByDifficulty(page, size, sortBy, direction,difficulty);
         PagedModel<EntityModel<RecipeDTO>> pagedModel = pagedResourcesAssembler.toModel(recipeDTOPage);
         return ResponseEntity.ok(pagedModel);
     }
