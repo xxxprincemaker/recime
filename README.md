@@ -89,7 +89,7 @@ Returns a paginated list of trending recipes ordered by position.
 **Query Parameters:**
 
 - `page` (optional, default: 0): Page number.
-- `size` (optional, default: 10): Number of recipes per page.
+- `size` (optional, default: 5): Number of recipes per page.
 - `difficulty` (required): Difficulty level of the recipes (e.g., easy, medium, hard).
 
 **Example Request:**
