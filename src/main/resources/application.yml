@@ -13,3 +13,22 @@ spring:
   jpa:
     database-platform: ${SPRING_DATASOURCE_PLATFORM:org.hibernate.dialect.H2Dialect}
     defer-datasource-initialization: true
+
+project:
+  name: @project.name@
+  version: @project.version@
+  description: @project.description@
+  maintainer:
+    name: ReciMe
+    email: example@recime.app
+
+server:
+  servlet:
+    context-path: /api
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    use-root-path: true

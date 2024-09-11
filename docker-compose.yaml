@@ -20,7 +20,7 @@ services:
 
   db:
     restart: on-failure
-    image: postgres:15 # Versão LTS do PostgreSQL
+    image: postgres:15-alpine # Versão LTS do PostgreSQL
     ports:
       - "5432:5432"
     environment:
@@ -38,7 +38,7 @@ services:
       retries: 5
 
   nginx:
-    image: nginx:latest
+    image: nginx:1.27.1-alpine
     restart: on-failure
     ports:
       - "80:80"
