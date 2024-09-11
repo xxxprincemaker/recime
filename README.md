@@ -31,20 +31,17 @@ This project uses the following technologies:
 
 ## Prerequisites
 
+### Using Maven Locally
+
+Make sure that you have maven installed on your machine. If not, you can download it from [here](https://maven.apache.org/download.cgi), and follow [this](https://alexadam.dev/blog/install-java-maven) tutorial to properly install maven,
+
+### Using Docker
 Before running the application with Docker, ensure you have Docker and Docker Compose installed on your machine. You can follow these guides for installation:
 
 - [Install Docker](https://docs.docker.com/get-docker/)
 - [Install Docker Compose](https://docs.docker.com/compose/install/)
 
 This project utilizes Docker to manage and deploy the application in a containerized environment. PostgreSQL is used as the database, and Nginx is configured as a reverse proxy to route traffic. When running the application with Docker Compose, it sets up the necessary services and configurations.
-
-To run the application using Docker Compose, execute:
-
-```bash
-docker compose up -d
-```
-
-Once the Docker Compose has started the containers, you can access the application through `http://localhost` on port 80. This setup routes traffic through Nginx to the Spring Boot application running on port 8080 internally.
 
 ## Installation
 
@@ -54,7 +51,35 @@ Once the Docker Compose has started the containers, you can access the applicati
    git clone https://github.com/xxxprincemaker/recime.git
    cd recime
    ```
+
+### Using Maven Locally
+
+2. **Configure the Database:**
+
+   Make sure to configure a compatible JPA database (e.g., H2, MySQL, PostgreSQL) in the application's `application.yml` file in the following project I have used H2 in memory database just to simulate an iteration with database.
+
+3. **Build the Project:**
+
+   To build and install the dependencies, run:
+
+   ```bash
+   mvn clean install
+   ```
+
 ## Running the Application
+
+### Using Maven Locally
+
+To start the Spring Boot server, run:
+
+```bash
+mvn spring-boot:run
+```
+
+The application will be available at `http://localhost:8080`.
+
+
+### Using Docker
 
 To run the application in a Docker environment, execute:
 
@@ -62,7 +87,7 @@ To run the application in a Docker environment, execute:
 docker compose up
 ```
 
-The application will be available at `http://localhost` on port 80.
+The application will be available at `http://localhost`.
 
 ## API Endpoints
 
