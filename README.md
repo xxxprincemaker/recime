@@ -78,7 +78,7 @@ GET http://localhost:8080/getTrendingRecipes?page=0&size=5
 
 **Description:**
 
-Returns a paginated list of trending recipes.
+Returns a paginated list of trending recipes ordered by position.
 
 ### 2. Get Trending Recipes by Difficulty
 
@@ -118,4 +118,4 @@ Contributions are welcome! To contribute, follow the steps below:
 
 ## License
 
-This project is licensed under the terms of the MIT license. See the `LICENSE` file for more information.
+This project is licensed under the terms of the MIT license. See the [LICENSE](LICENSE.md) file for more information.
