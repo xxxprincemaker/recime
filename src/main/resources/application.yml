@@ -6,11 +6,29 @@ spring:
     console:
       enabled: true
   datasource:
-    url: jdbc:h2:mem:mydb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE;MODE=PostgreSQL;
-    username: sa
-    password: password
-    driverClassName: org.h2.Driver
+    url: ${SPRING_DATASOURCE_URL:jdbc:h2:mem:mydb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE;MODE=PostgreSQL;}
+    username: ${SPRING_DATASOURCE_USERNAME:sa}
+    password: ${SPRING_DATASOURCE_PASSWORD:password}
+    driverClassName: ${SPRING_DATASOURCE_PLATFORM:org.h2.Driver}
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: ${SPRING_DATASOURCE_PLATFORM:org.hibernate.dialect.H2Dialect}
     defer-datasource-initialization: true
 
+project:
+  name: @project.name@
+  version: @project.version@
+  description: @project.description@
+  maintainer:
+    name: ReciMe
+    email: example@recime.app
+
+server:
+  servlet:
+    context-path: /api
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    use-root-path: true
