@@ -28,6 +28,9 @@ This project uses the following technologies:
 
 ## Installation
 
+0. **Prerequisites:**
+
+   Make sure that you have maven installed on your machine. If not, you can download it from [here](https://maven.apache.org/download.cgi), and follow [this](https://alexadam.dev/blog/install-java-maven) tutorial to properly install maven,
 1. **Clone the repository:**
 
    ```bash
