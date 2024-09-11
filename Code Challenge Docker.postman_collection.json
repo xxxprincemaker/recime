@@ -1,0 +1,181 @@
+{
+	"info": {
+		"_postman_id": "35632397-d0f6-4bda-b0dc-e026022eb031",
+		"name": "ReciMe - Code Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25797934"
+	},
+	"item": [
+		{
+			"name": "Get Trendings Recipes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"  pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Content-Type header is application/json\", function () {\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Verify the presence of _embedded object and recipeDTOes array\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData._embedded).to.exist.and.to.be.an('object');\r",
+							"    pm.expect(responseData._embedded.recipeDTOes).to.exist.and.to.be.an('array');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Validate the fields in the recipeDTOes array\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData._embedded).to.exist.and.to.be.an('object');\r",
+							"    pm.expect(responseData._embedded.recipeDTOes).to.exist.and.to.be.an('array');\r",
+							"\r",
+							"    responseData._embedded.recipeDTOes.forEach(function(recipe) {\r",
+							"        pm.expect(recipe.name).to.be.a('string');\r",
+							"        pm.expect(recipe.description).to.be.a('string');\r",
+							"        pm.expect(recipe.imageUrl).to.be.a('string');\r",
+							"        pm.expect(recipe.recipe).to.be.a('string');\r",
+							"        pm.expect(recipe.position).to.be.a('number');\r",
+							"        pm.expect(recipe.difficulty).to.be.a('string');\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Verify the presence of _links and page objects\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData._links).to.exist.and.to.be.an('object');\r",
+							"    pm.expect(responseData._links.first).to.exist.and.to.be.an('object');\r",
+							"    pm.expect(responseData._links.self).to.exist.and.to.be.an('object');\r",
+							"    pm.expect(responseData._links.next).to.exist.and.to.be.an('object');\r",
+							"    pm.expect(responseData._links.last).to.exist.and.to.be.an('object');\r",
+							"    \r",
+							"    pm.expect(responseData.page).to.exist.and.to.be.an('object');\r",
+							"    pm.expect(responseData.page.size).to.exist.and.to.be.a('number');\r",
+							"    pm.expect(responseData.page.totalElements).to.exist.and.to.be.a('number');\r",
+							"    pm.expect(responseData.page.totalPages).to.exist.and.to.be.a('number');\r",
+							"    pm.expect(responseData.page.number).to.exist.and.to.be.a('number');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/getTrendingRecipes?page=0&size=5",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getTrendingRecipes"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Trendings Recipes By Difficulty",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Content-Type header is application/json\", function () {\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is within an acceptable range\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(300);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Validate the presence of _links, page, size, totalElements, totalPages, and number in the response\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"  \r",
+							"  pm.expect(responseData).to.be.an('object');\r",
+							"  pm.expect(responseData._links).to.exist;\r",
+							"  pm.expect(responseData.page).to.exist;\r",
+							"  pm.expect(responseData.page.size).to.exist;\r",
+							"  pm.expect(responseData.page.totalElements).to.exist;\r",
+							"  pm.expect(responseData.page.totalPages).to.exist;\r",
+							"  pm.expect(responseData.page.number).to.exist;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Verify that the 'self' link is present in the _links section\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData._links).to.be.an('object');\r",
+							"    pm.expect(responseData._links.self).to.exist;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/getTrendingRecipesByDifficulty?page=0&size=10&difficulty=medium",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getTrendingRecipesByDifficulty"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						},
+						{
+							"key": "difficulty",
+							"value": "medium"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

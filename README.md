@@ -9,10 +9,10 @@ ReciMe API is a sample project to manage and query culinary recipes. The applica
 ## Table of Contents
 
 - [Technologies](#technologies)
+- [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Running the Application](#running-the-application)
 - [API Endpoints](#api-endpoints)
-- [Contributing](#contributing)
 - [License](#license)
 
 ## Technologies
@@ -25,9 +25,26 @@ This project uses the following technologies:
 - **Spring HATEOAS**: Support for adding hypermedia links to RESTful resources.
 - **Lombok**: Library to reduce boilerplate code in Java.
 - **Maven**: Dependency management and project build tool.
+- **Docker**: Containerization platform used to package and deploy the application along with its dependencies.
+- **PostgreSQL**: Relational database used for storing application data.
+- **Nginx**: Web server and reverse proxy used to route traffic and serve the application.
 
 ## Prerequisites
-   Make sure that you have maven installed on your machine. If not, you can download it from [here](https://maven.apache.org/download.cgi), and follow [this](https://alexadam.dev/blog/install-java-maven) tutorial to properly install maven,
+
+Before running the application with Docker, ensure you have Docker and Docker Compose installed on your machine. You can follow these guides for installation:
+
+- [Install Docker](https://docs.docker.com/get-docker/)
+- [Install Docker Compose](https://docs.docker.com/compose/install/)
+
+This project utilizes Docker to manage and deploy the application in a containerized environment. PostgreSQL is used as the database, and Nginx is configured as a reverse proxy to route traffic. When running the application with Docker Compose, it sets up the necessary services and configurations.
+
+To run the application using Docker Compose, execute:
+
+```bash
+docker compose up -d
+```
+
+Once the Docker Compose has started the containers, you can access the application through `http://localhost` on port 80. This setup routes traffic through Nginx to the Spring Boot application running on port 8080 internally.
 
 ## Installation
 
@@ -37,28 +54,15 @@ This project uses the following technologies:
    git clone https://github.com/xxxprincemaker/recime.git
    cd recime
    ```
-
-2. **Configure the Database:**
-
-   Make sure to configure a compatible JPA database (e.g., H2, MySQL, PostgreSQL) in the application's `application.yml` file in the following project I have used H2 in memory database just to simulate an iteration with database.
-
-3. **Build the Project:**
-
-   To build and install the dependencies, run:
-
-   ```bash
-   mvn clean install
-   ```
-
 ## Running the Application
 
-To start the Spring Boot server, run:
+To run the application in a Docker environment, execute:
 
 ```bash
-mvn spring-boot:run
+docker compose up
 ```
 
-The application will be available at `http://localhost:8080`.
+The application will be available at `http://localhost` on port 80.
 
 ## API Endpoints
 
@@ -78,7 +82,7 @@ The application will be available at `http://localhost:8080`.
 **Example Request:**
 
 ```http
-GET http://localhost:8080/getTrendingRecipes?page=0&size=5
+GET http://localhost/getTrendingRecipes?page=0&size=5
 ```
 
 **Description:**
@@ -102,7 +106,7 @@ Returns a paginated list of trending recipes ordered by position.
 **Example Request:**
 
 ```http
-GET http://localhost:8080/getTrendingRecipesByDifficulty?page=0&size=10&difficulty=easy
+GET http://localhost/getTrendingRecipesByDifficulty?page=0&size=10&difficulty=easy
 ```
 
 **Description:**
@@ -111,18 +115,13 @@ Returns a paginated list of recipes filtered by the specified difficulty level.
 
 ### Postman Collection
 
-You can import the Postman collection to test the API endpoints. The collection is available at [here](Code%20Challenge.postman_collection.json) .
-
-## Contributing
-
-Contributions are welcome! To contribute, follow the steps below:
-
-1. **Fork** the project.
-2. Create a new **branch**: `git checkout -b my-new-feature`.
-3. **Commit** your changes: `git commit -m 'Add new feature'`.
-4. **Push** to the branch: `git push origin my-new-feature`.
-5. Open a **Pull Request**.
+You can import the Postman collection to test the API endpoints. The collection is available [here](Code%20Challenge.postman_collection.json). In case you are using
+the docker version of this project, you can import the collection [here](Code%20Challenge%20Docker.postman_collection.json).
 
 ## License
 
 This project is licensed under the terms of the MIT license. See the [LICENSE](LICENSE.md) file for more information.
+
+---
+
+Feel free to reach out if you need any more adjustments!
