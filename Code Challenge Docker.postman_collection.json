@@ -77,11 +77,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/getTrendingRecipes?page=0&size=5",
+					"raw": "localhost/getTrendingRecipes?page=0&size=5",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
 					"path": [
 						"getTrendingRecipes"
 					],
@@ -151,11 +150,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/getTrendingRecipesByDifficulty?page=0&size=10&difficulty=medium",
+					"raw": "localhost/getTrendingRecipesByDifficulty?page=0&size=10&difficulty=medium",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
 					"path": [
 						"getTrendingRecipesByDifficulty"
 					],
