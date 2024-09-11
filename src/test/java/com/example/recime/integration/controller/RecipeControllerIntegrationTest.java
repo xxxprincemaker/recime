@@ -5,24 +5,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@ActiveProfiles("test")
 @SpringBootTest
 @AutoConfigureMockMvc
 public class RecipeControllerIntegrationTest {
     @Autowired
     private MockMvc mvc;
 
-
     @Test
     public void testGetTrendingRecipesShouldReturn200() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/getTrendingRecipes")
+        mvc.perform(MockMvcRequestBuilders.get("/api/recipe/search/findAllTrendingRecipes")
                         .param("page", "0")
                         .param("size", "10")
+                        .contextPath("/api")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.page.size").value(10))
@@ -34,10 +37,11 @@ public class RecipeControllerIntegrationTest {
 
     @Test
     public void testGetTrendingRecipesByDifficultyShouldReturn200() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/getTrendingRecipesByDifficulty")
+        mvc.perform(MockMvcRequestBuilders.get("/api/recipe/search/findAllTrendingRecipesByDifficulty")
                         .param("page", "0")
                         .param("size", "10")
                         .param("difficulty", "easy")
+                        .contextPath("/api")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.page.size").value(10))
@@ -56,9 +60,10 @@ public class RecipeControllerIntegrationTest {
 
     @Test
     public void testGetTrendingRecipesByDifficultyShouldReturn404() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/getTrendingRecipesByDifficulty")
+        mvc.perform(MockMvcRequestBuilders.get("/api/recipe/search/findAllTrendingRecipesByDifficulty")
                         .param("page", "0")
                         .param("size", "10")
+                        .contextPath("/api")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("A difficulty required for filtering trending recipes"));

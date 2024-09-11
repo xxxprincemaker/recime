@@ -37,11 +37,11 @@ public class RecipeController {
             @ApiResponse(
                     responseCode = "400",
                     description = "Bad request if parameters are invalid.",
-                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseError.class))}, useReturnTypeSchema = true),
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseError.class))}),
             @ApiResponse(
                     responseCode = "500",
                     description = "Internal server error.",
-                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseError.class))}, useReturnTypeSchema = true),
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseError.class))}),
     })
     @GetMapping(value = "/search/findAllTrendingRecipes", produces = "application/json")
     public ResponseEntity<PagedModel<EntityModel<RecipeDTO>>> getTrendingRecipes(
@@ -64,11 +64,11 @@ public class RecipeController {
             @ApiResponse(
                     responseCode = "400",
                     description = "Bad request if parameters are invalid.",
-                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseError.class))}, useReturnTypeSchema = true),
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseError.class))}),
             @ApiResponse(
                     responseCode = "500",
                     description = "Internal server error.",
-                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseError.class))}, useReturnTypeSchema = true),
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseError.class))}),
     })
     @GetMapping(value = "/search/findAllTrendingRecipesByDifficulty", produces = "application/json")
     public ResponseEntity<PagedModel<EntityModel<RecipeDTO>>> getTrendingRecipesByDifficulty(

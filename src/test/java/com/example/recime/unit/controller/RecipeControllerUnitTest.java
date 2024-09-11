@@ -15,6 +15,8 @@ import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -26,7 +28,9 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@ActiveProfiles("test")
 @WebMvcTest(RecipeController.class)
+@TestPropertySource("classpath:application-test.yml")
 public class RecipeControllerUnitTest {
     @Autowired
     private MockMvc mockMvc;
@@ -39,7 +43,6 @@ public class RecipeControllerUnitTest {
 
     @BeforeEach
     void setUp() {
-
         MockitoAnnotations.openMocks(this);
     }
 
@@ -54,9 +57,12 @@ public class RecipeControllerUnitTest {
         when(recipeService.getTrendingRecipes(anyInt(), anyInt(), anyString(),anyString())).thenReturn(page);
         when(pagedResourcesAssembler.toModel(page)).thenReturn(pagedModel);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/getTrendingRecipes")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/recipe/search/findAllTrendingRecipes")
                         .param("page", "0")
                         .param("size", "10")
+                        .param("sortBy", "position")
+                        .param("direction", "asc")
+                        .contextPath("/api")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.page.size").value(10))
@@ -82,10 +88,11 @@ public class RecipeControllerUnitTest {
         when(recipeService.getTrendingRecipesByDifficulty(anyInt(), anyInt(), anyString(),anyString(), anyString())).thenReturn(page);
         when(pagedResourcesAssembler.toModel(page)).thenReturn(pagedModel);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/getTrendingRecipesByDifficulty")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/recipe/search/findAllTrendingRecipesByDifficulty")
                         .param("page", "0")
                         .param("size", "10")
                         .param("difficulty", "easy")
+                        .contextPath("/api")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.page.size").value(10))
@@ -111,9 +118,10 @@ public class RecipeControllerUnitTest {
         when(recipeService.getTrendingRecipes(anyInt(), anyInt(), anyString(),anyString())).thenReturn(page);
         when(pagedResourcesAssembler.toModel(page)).thenReturn(pagedModel);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/getTrendingRecipesByDifficulty")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/recipe/search/findAllTrendingRecipesByDifficulty")
                         .param("page", "0")
                         .param("size", "10")
+                        .contextPath("/api")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("A difficulty required for filtering trending recipes"));

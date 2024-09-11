@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: test
   application:
     name: recime
 
@@ -10,4 +12,6 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     defer-datasource-initialization: true
-
+server:
+  servlet:
+    context-path: /api
