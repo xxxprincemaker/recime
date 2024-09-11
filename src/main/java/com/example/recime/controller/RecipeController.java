@@ -29,7 +29,7 @@ public class RecipeController {
 
     @GetMapping(value = "/getTrendingRecipesByDifficulty", produces = "application/json")
     public ResponseEntity<PagedModel<EntityModel<RecipeDTO>>> getTrendingRecipesByDiffculty(@RequestParam(defaultValue = "0") Integer page,
-                                                                                            @RequestParam(defaultValue = "10") Integer size,
+                                                                                            @RequestParam(defaultValue = "5") Integer size,
                                                                                             @RequestParam String difficulty) {
         Page<RecipeDTO> recipeDTOPage = recipeService.getTrendingRecipesByDifficulty(page, size, difficulty);
         PagedModel<EntityModel<RecipeDTO>> pagedModel = pagedResourcesAssembler.toModel(recipeDTOPage);
