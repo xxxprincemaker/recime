@@ -160,5 +160,3 @@ the docker version of this project, you can import the collection [here](Code%20
 This project is licensed under the terms of the MIT license. See the [LICENSE](LICENSE.md) file for more information.
 
 ---
-
-Feel free to reach out if you need any more adjustments!
