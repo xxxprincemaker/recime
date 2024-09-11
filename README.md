@@ -109,7 +109,7 @@ Returns a paginated list of recipes filtered by the specified difficulty level.
 
 ### Postman Collection
 
-You can import the Postman collection to test the API endpoints. The collection is available at [here](Code Challenge.postman_collection.json) .
+You can import the Postman collection to test the API endpoints. The collection is available at [here](Code%20Challenge.postman_collection.json) .
 
 ## Contributing
 
