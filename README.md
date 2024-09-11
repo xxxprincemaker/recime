@@ -2,9 +2,9 @@
 
 ---
 
-# Recime API
+# ReciMe API
 
-Recime API is a sample project to manage and query culinary recipes. The application provides endpoints to fetch trending recipes and filter recipes by difficulty.
+ReciMe API is a sample project to manage and query culinary recipes. The application provides endpoints to fetch trending recipes and filter recipes by difficulty.
 
 ## Table of Contents
 
@@ -31,8 +31,8 @@ This project uses the following technologies:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-username/recime-api.git
-   cd recime-api
+   git clone https://github.com/xxxprincemaker/recime.git
+   cd recime
    ```
 
 2. **Configure the Database:**
