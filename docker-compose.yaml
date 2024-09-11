@@ -20,7 +20,7 @@ services:
 
   db:
     restart: on-failure
-    image: postgres:15-alpine # Versão LTS do PostgreSQL
+    image: postgres:15-alpine
     ports:
       - "5432:5432"
     environment:
@@ -28,7 +28,7 @@ services:
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: mypassword
     volumes:
-      - ./init-scripts:/docker-entrypoint-initdb.d:ro # Monta o diretório com scripts SQL para inicialização
+      - ./init-scripts:/docker-entrypoint-initdb.d:ro
     networks:
       - mynetwork
     healthcheck:
