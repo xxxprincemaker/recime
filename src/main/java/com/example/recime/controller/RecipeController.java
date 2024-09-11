@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController()
+@RestController
 @RequiredArgsConstructor
 public class RecipeController {
     private final RecipeService recipeService;
@@ -21,7 +21,7 @@ public class RecipeController {
 
     @GetMapping(value = "/getTrendingRecipes", produces = "application/json")
     public ResponseEntity<PagedModel<EntityModel<RecipeDTO>>> getTrendingRecipes(@RequestParam(defaultValue = "0") Integer page,
-                                                                                 @RequestParam(defaultValue = "10") Integer size) {
+                                                                                 @RequestParam(defaultValue = "5") Integer size) {
         Page<RecipeDTO> recipeDTOPage = recipeService.getTrendingRecipes(page, size);
         PagedModel<EntityModel<RecipeDTO>> pagedModel = pagedResourcesAssembler.toModel(recipeDTOPage);
         return ResponseEntity.ok(pagedModel);
