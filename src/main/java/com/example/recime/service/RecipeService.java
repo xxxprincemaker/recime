@@ -16,7 +16,7 @@ public class RecipeService {
     private final RecipeRepository recipeRepository;
 
     public Page<RecipeDTO> getTrendingRecipes(Integer page, Integer size, String sortsBy, String direction) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(direction),sortsBy).ascending());
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(direction),sortsBy));
         Page<Recipe> recipePage = recipeRepository.findAll(pageable);
         List<RecipeDTO> recipeDTOPage = recipePage.getContent().stream().map(RecipeMapper::convertToDTO).toList();
         return new PageImpl<>(recipeDTOPage, pageable, recipePage.getTotalElements());
