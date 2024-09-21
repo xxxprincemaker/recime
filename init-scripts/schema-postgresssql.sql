@@ -1,12 +1,50 @@
-CREATE TABLE Recipe (
-                        ID          uuid          DEFAULT gen_random_uuid() PRIMARY KEY,
-                        NAME        VARCHAR(255) NOT NULL,
-                        DESCRIPTION VARCHAR(1024),
-                        IMAGEURL    VARCHAR(1024) DEFAULT 'https://ddg0cip9uom1w.cloudfront.net/code-challenge/burger.jpg',
-                        RECIPE      VARCHAR(4000),
-                        POSITION    INTEGER, -- Use INTEGER instead of INT
-                        DIFFICULTY  VARCHAR(40)
+CREATE TABLE Recipe
+(
+    ID          UUID          DEFAULT gen_random_uuid() PRIMARY KEY,  -- Em PostgreSQL, usamos gen_random_uuid() para gerar UUIDs
+    NAME        VARCHAR(255) NOT NULL,
+    DESCRIPTION VARCHAR(1024),
+    IMAGEURL    VARCHAR(1024) DEFAULT 'https://ddg0cip9uom1w.cloudfront.net/code-challenge/burger.jpg',
+    RECIPE      VARCHAR(4000),
+    POSITION    INT,
+    DIFFICULTY  VARCHAR(40)
 );
+
+CREATE TABLE Ingredient
+(
+    ID          UUID          DEFAULT gen_random_uuid() PRIMARY KEY,  -- Usamos gen_random_uuid() também aqui
+    NAME        VARCHAR(255) NOT NULL,
+    UNIT        VARCHAR(50)  NOT NULL -- Exemplo: "grams", "pieces", "cups"
+);
+
+CREATE TABLE Recipe_Ingredient (
+                                   RECIPE_ID UUID NOT NULL,                    -- Chave estrangeira para a tabela Recipe
+                                   INGREDIENT_ID UUID NOT NULL,                -- Chave estrangeira para a tabela Ingredient
+                                   QUANTITY DECIMAL(10, 2) NOT NULL,           -- Quantidade do ingrediente usado na receita
+                                   FOREIGN KEY (RECIPE_ID) REFERENCES Recipe(ID) ON DELETE CASCADE,  -- Adicionado ON DELETE CASCADE para garantir a exclusão em cascata
+                                   FOREIGN KEY (INGREDIENT_ID) REFERENCES Ingredient(ID) ON DELETE CASCADE, -- Adicionado ON DELETE CASCADE também aqui
+                                   UNIQUE(RECIPE_ID, INGREDIENT_ID)            -- Garante que não haja duplicação de ingredientes por receita
+);
+
+INSERT INTO Ingredient (ID, NAME, UNIT)
+VALUES
+    (gen_random_uuid(), 'Ground Beef', 'grams'),
+    (gen_random_uuid(), 'Cheddar Cheese', 'grams'),
+    (gen_random_uuid(), 'Lettuce', 'pieces'),
+    (gen_random_uuid(), 'Tomato', 'pieces'),
+    (gen_random_uuid(), 'Pickles', 'pieces'),
+    (gen_random_uuid(), 'Bacon', 'grams'),
+    (gen_random_uuid(), 'BBQ Sauce', 'ml'),
+    (gen_random_uuid(), 'Onion Rings', 'pieces'),
+    (gen_random_uuid(), 'Swiss Cheese', 'grams'),
+    (gen_random_uuid(), 'Mushrooms', 'grams'),
+    (gen_random_uuid(), 'Jalapeños', 'pieces'),
+    (gen_random_uuid(), 'Pepper Jack Cheese', 'grams'),
+    (gen_random_uuid(), 'Black Beans', 'grams'),
+    (gen_random_uuid(), 'Quinoa', 'grams'),
+    (gen_random_uuid(), 'Avocado', 'pieces'),
+    (gen_random_uuid(), 'Blue Cheese', 'grams'),
+    (gen_random_uuid(), 'Pineapple', 'pieces'),
+    (gen_random_uuid(), 'Ham', 'grams');
 
 INSERT INTO Recipe (ID, NAME, DESCRIPTION, IMAGEURL, RECIPE, POSITION, DIFFICULTY)
 VALUES
@@ -98,3 +136,92 @@ VALUES
      'https://ddg0cip9uom1w.cloudfront.net/code-challenge/burger.jpg',
      '1. Form ground beef into patties and grill. 2. Top with mozzarella cheese. 3. Add pesto sauce and sun-dried tomatoes. 4. Serve on a bun with fresh spinach.',
      20, 'medium');
+
+-- Classic Cheeseburger
+INSERT INTO Recipe_Ingredient (RECIPE_ID, INGREDIENT_ID, QUANTITY)
+SELECT r.ID, i.ID, 200.00
+FROM Recipe r, Ingredient i
+WHERE r.NAME = 'Classic Cheeseburger'
+  AND i.NAME = 'Ground Beef';
+
+INSERT INTO Recipe_Ingredient (RECIPE_ID, INGREDIENT_ID, QUANTITY)
+SELECT r.ID, i.ID, 50.00
+FROM Recipe r, Ingredient i
+WHERE r.NAME = 'Classic Cheeseburger'
+  AND i.NAME = 'Cheddar Cheese';
+
+INSERT INTO Recipe_Ingredient (RECIPE_ID, INGREDIENT_ID, QUANTITY)
+SELECT r.ID, i.ID, 1.00
+FROM Recipe r, Ingredient i
+WHERE r.NAME = 'Classic Cheeseburger'
+  AND i.NAME = 'Lettuce';
+
+INSERT INTO Recipe_Ingredient (RECIPE_ID, INGREDIENT_ID, QUANTITY)
+SELECT r.ID, i.ID, 1.00
+FROM Recipe r, Ingredient i
+WHERE r.NAME = 'Classic Cheeseburger'
+  AND i.NAME = 'Tomato';
+
+-- Bacon Cheeseburger
+INSERT INTO Recipe_Ingredient (RECIPE_ID, INGREDIENT_ID, QUANTITY)
+SELECT r.ID, i.ID, 200.00
+FROM Recipe r, Ingredient i
+WHERE r.NAME = 'Bacon Cheeseburger'
+  AND i.NAME = 'Ground Beef';
+
+INSERT INTO Recipe_Ingredient (RECIPE_ID, INGREDIENT_ID, QUANTITY)
+SELECT r.ID, i.ID, 50.00
+FROM Recipe r, Ingredient i
+WHERE r.NAME = 'Bacon Cheeseburger'
+  AND i.NAME = 'Cheddar Cheese';
+
+INSERT INTO Recipe_Ingredient (RECIPE_ID, INGREDIENT_ID, QUANTITY)
+SELECT r.ID, i.ID, 2.00
+FROM Recipe r, Ingredient i
+WHERE r.NAME = 'Bacon Cheeseburger'
+  AND i.NAME = 'Bacon';
+
+-- BBQ Burger
+INSERT INTO Recipe_Ingredient (RECIPE_ID, INGREDIENT_ID, QUANTITY)
+SELECT r.ID, i.ID, 200.00
+FROM Recipe r, Ingredient i
+WHERE r.NAME = 'BBQ Burger'
+  AND i.NAME = 'Ground Beef';
+
+INSERT INTO Recipe_Ingredient (RECIPE_ID, INGREDIENT_ID, QUANTITY)
+SELECT r.ID, i.ID, 50.00
+FROM Recipe r, Ingredient i
+WHERE r.NAME = 'BBQ Burger'
+  AND i.NAME = 'Cheddar Cheese';
+
+INSERT INTO Recipe_Ingredient (RECIPE_ID, INGREDIENT_ID, QUANTITY)
+SELECT r.ID, i.ID, 2.00
+FROM Recipe r, Ingredient i
+WHERE r.NAME = 'BBQ Burger'
+  AND i.NAME = 'Onion Rings';
+
+INSERT INTO Recipe_Ingredient (RECIPE_ID, INGREDIENT_ID, QUANTITY)
+SELECT r.ID, i.ID, 30.00
+FROM Recipe r, Ingredient i
+WHERE r.NAME = 'BBQ Burger'
+  AND i.NAME = 'BBQ Sauce';
+
+-- Mushroom Swiss Burger
+INSERT INTO Recipe_Ingredient (RECIPE_ID, INGREDIENT_ID, QUANTITY)
+SELECT r.ID, i.ID, 200.00
+FROM Recipe r, Ingredient i
+WHERE r.NAME = 'Mushroom Swiss Burger'
+  AND i.NAME = 'Ground Beef';
+
+INSERT INTO Recipe_Ingredient (RECIPE_ID, INGREDIENT_ID, QUANTITY)
+SELECT r.ID, i.ID, 50.00
+FROM Recipe r, Ingredient i
+WHERE r.NAME = 'Mushroom Swiss Burger'
+  AND i.NAME = 'Swiss Cheese';
+
+INSERT INTO Recipe_Ingredient (RECIPE_ID, INGREDIENT_ID, QUANTITY)
+SELECT r.ID, i.ID, 100.00
+FROM Recipe r, Ingredient i
+WHERE r.NAME = 'Mushroom Swiss Burger'
+  AND i.NAME = 'Mushrooms';
+;

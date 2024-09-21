@@ -3,6 +3,8 @@ package com.example.recime.model.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Map;
+
 @Entity
 @Getter
 @Setter
@@ -26,4 +28,10 @@ public class Recipe {
     private Integer position;
     @Column(name = "DIFFICULTY")
     private String difficulty;
+
+    @ElementCollection
+    @CollectionTable(name = "Recipe_Ingredient", joinColumns = @JoinColumn(name = "RECIPE_ID"))
+    @MapKeyJoinColumn(name = "INGREDIENT_ID")
+    @Column(name = "QUANTITY")
+    private Map<Ingredient, Double> ingredients;
 }

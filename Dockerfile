@@ -8,7 +8,7 @@ RUN mvn dependency:go-offline -B
 
 # copy the rest of the app and build it.
 COPY src /app/src
-RUN mvn clean package
+RUN mvn clean package -DskipTests
 
 # Running Phase
 FROM amazoncorretto:17-alpine

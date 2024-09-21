@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.*;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @Builder
@@ -16,4 +18,5 @@ public class RecipeDTO {
     private String recipe;
     private Integer position;
     private String difficulty;
+    private Set<IngredientDTO> ingredients;
 }

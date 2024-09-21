@@ -78,7 +78,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/api/recipe/search/findAllTrendingRecipes?page=0&size=5",
+					"raw": "localhost:8080/api/recipe/v1/search/findAllTrendingRecipes?page=0&size=5",
 					"host": [
 						"localhost"
 					],
@@ -165,7 +165,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/api/recipe/search/findAllTrendingRecipesByDifficulty?page=0&size=10&difficulty=easy",
+					"raw": "localhost:8080/api/recipe/v1/search/findAllTrendingRecipesByDifficulty?page=0&size=10&difficulty=easy",
 					"host": [
 						"localhost"
 					],

@@ -22,7 +22,7 @@ public class RecipeControllerIntegrationTest {
 
     @Test
     public void testGetTrendingRecipesShouldReturn200() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/api/recipe/search/findAllTrendingRecipes")
+        mvc.perform(MockMvcRequestBuilders.get("/api/recipe/v1/search/findAllTrendingRecipes")
                         .param("page", "0")
                         .param("size", "10")
                         .contextPath("/api")
@@ -37,7 +37,7 @@ public class RecipeControllerIntegrationTest {
 
     @Test
     public void testGetTrendingRecipesByDifficultyShouldReturn200() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/api/recipe/search/findAllTrendingRecipesByDifficulty")
+        mvc.perform(MockMvcRequestBuilders.get("/api/recipe/v1/search/findAllTrendingRecipesByDifficulty")
                         .param("page", "0")
                         .param("size", "10")
                         .param("difficulty", "easy")
@@ -60,7 +60,7 @@ public class RecipeControllerIntegrationTest {
 
     @Test
     public void testGetTrendingRecipesByDifficultyShouldReturn404() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/api/recipe/search/findAllTrendingRecipesByDifficulty")
+        mvc.perform(MockMvcRequestBuilders.get("/api/recipe/v1/search/findAllTrendingRecipesByDifficulty")
                         .param("page", "0")
                         .param("size", "10")
                         .contextPath("/api")

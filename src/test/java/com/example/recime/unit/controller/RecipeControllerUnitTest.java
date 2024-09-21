@@ -57,7 +57,7 @@ public class RecipeControllerUnitTest {
         when(recipeService.getTrendingRecipes(anyInt(), anyInt(), anyString(),anyString())).thenReturn(page);
         when(pagedResourcesAssembler.toModel(page)).thenReturn(pagedModel);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/recipe/search/findAllTrendingRecipes")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/recipe/v1/search/findAllTrendingRecipes")
                         .param("page", "0")
                         .param("size", "10")
                         .param("sortBy", "position")
@@ -88,7 +88,7 @@ public class RecipeControllerUnitTest {
         when(recipeService.getTrendingRecipesByDifficulty(anyInt(), anyInt(), anyString(),anyString(), anyString())).thenReturn(page);
         when(pagedResourcesAssembler.toModel(page)).thenReturn(pagedModel);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/recipe/search/findAllTrendingRecipesByDifficulty")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/recipe/v1/search/findAllTrendingRecipesByDifficulty")
                         .param("page", "0")
                         .param("size", "10")
                         .param("difficulty", "easy")
@@ -118,7 +118,7 @@ public class RecipeControllerUnitTest {
         when(recipeService.getTrendingRecipes(anyInt(), anyInt(), anyString(),anyString())).thenReturn(page);
         when(pagedResourcesAssembler.toModel(page)).thenReturn(pagedModel);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/recipe/search/findAllTrendingRecipesByDifficulty")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/recipe/v1/search/findAllTrendingRecipesByDifficulty")
                         .param("page", "0")
                         .param("size", "10")
                         .contextPath("/api")
