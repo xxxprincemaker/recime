@@ -1,6 +1,7 @@
 package com.example.recime.service;
 
 import com.example.recime.model.dto.RecipeDTO;
+import com.example.recime.model.entity.Ingredient;
 import com.example.recime.model.entity.Recipe;
 import com.example.recime.repository.RecipeRepository;
 import com.example.recime.util.mapper.RecipeMapper;
@@ -30,5 +31,15 @@ public class RecipeService {
     }
 
 
+    public Page<RecipeDTO> getTrendingRecipesByIngredient(Integer page, Integer size, String sortsBy, String direction, List<String> ingredients, Boolean onlyIngredientRecipe) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(direction),sortsBy));
+
+        Page<Recipe> recipePage = onlyIngredientRecipe
+                ? recipeRepository.findAllRecipesByThatHaveOnlyThoseIngredients(ingredients, ingredients.size(), pageable)
+                : recipeRepository.findAllByIngredient(ingredients, pageable);
+
+        List<RecipeDTO> recipeDTOPage = recipePage.getContent().stream().map(RecipeMapper::convertToDTO).toList();
+        return new PageImpl<>(recipeDTOPage, pageable, recipePage.getTotalElements());
+    }
 
 }

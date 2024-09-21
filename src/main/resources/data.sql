@@ -1,3 +1,25 @@
+INSERT INTO Ingredient (ID, NAME, UNIT)
+VALUES
+    (RANDOM_UUID(), 'Ground Beef', 'grams'),
+    (RANDOM_UUID(), 'Cheddar Cheese', 'grams'),
+    (RANDOM_UUID(), 'Lettuce', 'pieces'),
+    (RANDOM_UUID(), 'Tomato', 'pieces'),
+    (RANDOM_UUID(), 'Pickles', 'pieces'),
+    (RANDOM_UUID(), 'Bacon', 'grams'),
+    (RANDOM_UUID(), 'BBQ Sauce', 'ml'),
+    (RANDOM_UUID(), 'Onion Rings', 'pieces'),
+    (RANDOM_UUID(), 'Swiss Cheese', 'grams'),
+    (RANDOM_UUID(), 'Mushrooms', 'grams'),
+    (RANDOM_UUID(), 'Jalapeños', 'pieces'),
+    (RANDOM_UUID(), 'Pepper Jack Cheese', 'grams'),
+    (RANDOM_UUID(), 'Black Beans', 'grams'),
+    (RANDOM_UUID(), 'Quinoa', 'grams'),
+    (RANDOM_UUID(), 'Avocado', 'pieces'),
+    (RANDOM_UUID(), 'Blue Cheese', 'grams'),
+    (RANDOM_UUID(), 'Pineapple', 'pieces'),
+    (RANDOM_UUID(), 'Ham', 'grams');
+
+
 INSERT INTO Recipe (ID, NAME, DESCRIPTION, IMAGEURL, RECIPE, POSITION, DIFFICULTY)
 VALUES
     (RANDOM_UUID(), 'Classic Cheeseburger',
@@ -88,3 +110,93 @@ VALUES
      'https://ddg0cip9uom1w.cloudfront.net/code-challenge/burger.jpg',
      '1. Form ground beef into patties and grill. 2. Top with mozzarella cheese. 3. Add pesto sauce and sun-dried tomatoes. 4. Serve on a bun with fresh spinach.',
      20, 'medium');
+
+
+-- Classic Cheeseburger
+INSERT INTO Recipe_Ingredient (RECIPE_ID, INGREDIENT_ID, QUANTITY)
+SELECT r.ID, i.ID, 200.00
+FROM Recipe r, Ingredient i
+WHERE r.NAME = 'Classic Cheeseburger'
+  AND i.NAME = 'Ground Beef';
+
+INSERT INTO Recipe_Ingredient (RECIPE_ID, INGREDIENT_ID, QUANTITY)
+SELECT r.ID, i.ID, 50.00
+FROM Recipe r, Ingredient i
+WHERE r.NAME = 'Classic Cheeseburger'
+  AND i.NAME = 'Cheddar Cheese';
+
+INSERT INTO Recipe_Ingredient (RECIPE_ID, INGREDIENT_ID, QUANTITY)
+SELECT r.ID, i.ID, 1.00
+FROM Recipe r, Ingredient i
+WHERE r.NAME = 'Classic Cheeseburger'
+  AND i.NAME = 'Lettuce';
+
+INSERT INTO Recipe_Ingredient (RECIPE_ID, INGREDIENT_ID, QUANTITY)
+SELECT r.ID, i.ID, 1.00
+FROM Recipe r, Ingredient i
+WHERE r.NAME = 'Classic Cheeseburger'
+  AND i.NAME = 'Tomato';
+
+-- Bacon Cheeseburger
+INSERT INTO Recipe_Ingredient (RECIPE_ID, INGREDIENT_ID, QUANTITY)
+SELECT r.ID, i.ID, 200.00
+FROM Recipe r, Ingredient i
+WHERE r.NAME = 'Bacon Cheeseburger'
+  AND i.NAME = 'Ground Beef';
+
+INSERT INTO Recipe_Ingredient (RECIPE_ID, INGREDIENT_ID, QUANTITY)
+SELECT r.ID, i.ID, 50.00
+FROM Recipe r, Ingredient i
+WHERE r.NAME = 'Bacon Cheeseburger'
+  AND i.NAME = 'Cheddar Cheese';
+
+INSERT INTO Recipe_Ingredient (RECIPE_ID, INGREDIENT_ID, QUANTITY)
+SELECT r.ID, i.ID, 2.00
+FROM Recipe r, Ingredient i
+WHERE r.NAME = 'Bacon Cheeseburger'
+  AND i.NAME = 'Bacon';
+
+-- BBQ Burger
+INSERT INTO Recipe_Ingredient (RECIPE_ID, INGREDIENT_ID, QUANTITY)
+SELECT r.ID, i.ID, 200.00
+FROM Recipe r, Ingredient i
+WHERE r.NAME = 'BBQ Burger'
+  AND i.NAME = 'Ground Beef';
+
+INSERT INTO Recipe_Ingredient (RECIPE_ID, INGREDIENT_ID, QUANTITY)
+SELECT r.ID, i.ID, 50.00
+FROM Recipe r, Ingredient i
+WHERE r.NAME = 'BBQ Burger'
+  AND i.NAME = 'Cheddar Cheese';
+
+INSERT INTO Recipe_Ingredient (RECIPE_ID, INGREDIENT_ID, QUANTITY)
+SELECT r.ID, i.ID, 2.00
+FROM Recipe r, Ingredient i
+WHERE r.NAME = 'BBQ Burger'
+  AND i.NAME = 'Onion Rings';
+
+INSERT INTO Recipe_Ingredient (RECIPE_ID, INGREDIENT_ID, QUANTITY)
+SELECT r.ID, i.ID, 30.00
+FROM Recipe r, Ingredient i
+WHERE r.NAME = 'BBQ Burger'
+  AND i.NAME = 'BBQ Sauce';
+
+-- Mushroom Swiss Burger
+INSERT INTO Recipe_Ingredient (RECIPE_ID, INGREDIENT_ID, QUANTITY)
+SELECT r.ID, i.ID, 200.00
+FROM Recipe r, Ingredient i
+WHERE r.NAME = 'Mushroom Swiss Burger'
+  AND i.NAME = 'Ground Beef';
+
+INSERT INTO Recipe_Ingredient (RECIPE_ID, INGREDIENT_ID, QUANTITY)
+SELECT r.ID, i.ID, 50.00
+FROM Recipe r, Ingredient i
+WHERE r.NAME = 'Mushroom Swiss Burger'
+  AND i.NAME = 'Swiss Cheese';
+
+INSERT INTO Recipe_Ingredient (RECIPE_ID, INGREDIENT_ID, QUANTITY)
+SELECT r.ID, i.ID, 100.00
+FROM Recipe r, Ingredient i
+WHERE r.NAME = 'Mushroom Swiss Burger'
+  AND i.NAME = 'Mushrooms';
+;
